@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            background-color: #f5f6f8;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .content{
+            margin-top: 10px;
+            background-color: #fff;
+            padding: 0 15px;
+            border-top: 1px solid #e2e3e5;
+            border-bottom: 1px solid #e2e3e5;
+        }
+        .name,.phone{
+            height: 45px;
+            display: flex;
+            align-items: center;
+            color: #333333;
+            font-size: 14px;
+        }
+        .name{
+            border-bottom: 1px solid #e6e6e6;   
+        }
+        .name span,.phone span{
+           width: 80px; 
+        }
+        ::-webkit-input-placeholder {
+            font-size: 14px;
+            color:#cccccc;
+    　　}
+        input{
+            border: 0; 
+            outline: none;
+        }
+		
+        .textarea_box{
+            padding: 15px;
+            background-color: #fff;
+            margin-top: 10px;
+            border-top: 1px solid #e2e3e5;
+            border-bottom: 1px solid #e2e3e5;
+            overflow: hidden;
+        }
+        textarea{
+            width: 100%;
+            height: 110px;
+            border: 0;
+            resize: none;
+            outline: none;  
+        }
+        .length{
+            float: right;
+            color: #999999;
+        }
+        .submit_box{
+            padding: 0 15px;
+            margin-top: 20px;            
+        }
+        .submit{
+            width: 100%;
+            border-radius: 5px;
+            background-color: #19bbff;
+            color: #ffffff;
+            line-height: 45px;
+            text-align: center;
+            font-size: 15px;
+        }
+ .cover{
+     width: 100%;
+     height: 100%;
+     background: rgba(0, 0, 0, 0.4);
+     position: fixed;
+     z-index: 999;
+     top: 0;
+     display: none;
+ }
+ .cover-box{
+     width:250px;
+     height: 150px;
+     background: #fff;
+     margin: 200px auto;
+     border-radius: 5px;
+     font-size: 14px;
+ }
+ .cover-title{
+    text-align: center;
+    line-height: 40px;
+    border-bottom: 1px solid #ebebeb;
+ }
+ .info{
+     margin-top: 20px;
+     text-align: center;
+ }
+ .close{
+     float: right;
+     width: 50px;
+     height: 25px;
+     background: #077bd9;
+     border-radius: 5px;
+     line-height: 25px;
+     text-align: center;
+     font-size: 14px;
+     color: #fff;
+     margin-right: 20px;
+     margin-top: 20px;
+ }
+ #phone,#name{
+	height: 90%;
+ }
+    </style>
+</head>
+
+<body>
+    <div class="suggestion">
+        <div class="content">
+            <div class="name">
+                <span>联系人</span> 
+                <input type="text" id="name" placeholder="例如“张三”">
+            </div> 
+            <div class="phone">
+                <span>联系电话</span>
+                <input type="text" id="phone" placeholder="请输入手机号码">
+            </div>
+        </div>
+        <div class="textarea_box">
+            <textarea placeholder="请输入您的意见" class="sug" maxlength=50></textarea>
+            <div class="length"><span id="num">50</span>/50</div>
+        </div> 
+        <div class="submit_box">
+            <div class="submit">确认提交</div>
+        </div> 
+                      
+    </div>
+<div class="cover">
+    <div class="cover-box">
+        <div class="cover-title">提示</div>
+        <div class="info"></div>
+        <div class="close">确认</div>
+    </div>   
+</div>
+<script src="jquery-1.11.1.min.js"></script>
+<script>
+    $(function () {
+    $(".submit").click(function () {
+        if($("#name").val().length<=0){
+            $(".cover").show();
+            $(".info").html("请输入联系人");
+            return;
+        }
+        if($("#phone").val().length<=0){
+            $(".cover").show();
+            $(".info").html("请输入联系电话");
+            return;
+        }
+        if($(".sug").val().length<=0){
+            $(".cover").show();
+            $(".info").html("请输入您的意见");
+            return;
+        }
+    })
+    $(".close").click(function () {
+        $(".cover").hide();
+        $(".info").html("");   
+    });
+    $(".sug").bind("input propertychange",function(event){
+        var val = $(".sug").val();
+        var length = val.length;
+        if(length<=50){
+            $("#num").html(50-length);
+        }
+    });
+})
+</script>
+</body>
+
+</html>
